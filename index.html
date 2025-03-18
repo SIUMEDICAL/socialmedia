@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIU MEDICAL SOCIAL MEDIA</title>
+    <!-- Favicon -->
+    <link rel="icon" href="assets/logo.png" type="image/x-icon" />
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Core theme CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+      .content {
+        width: 90%;
+        max-width: 400px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+      .link {
+        display: block;
+        margin: 10px 0;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      #music-controls {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #music-toggle, #volume-slider {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+      #volume-slider {
+        width: 80%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="video-bg">
+      <source src="assets/videobg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <!-- End of Video Background -->
+
+    <div class="content">
+      <a id="profilePicture" href="#popup">
+        <img src="assets/profile.jpg" alt="Profile Picture">
+      </a>
+
+      <div id="userName">
+        SIU MEDICAL
+      </div>
+
+      <div id="links">
+        <a class="link" href="https://maps.app.goo.gl/b4rVFxNecc25ZW6d7" target="_blank">
+          <i class="fas fa-map-marker-alt"></i>&nbsp;Address
+        </a>
+        <a class="link" href="https://wa.me/6287780058225" target="_blank">
+          <i class="fab fa-whatsapp"></i>&nbsp;Whatsapp
+        </a>
+        <a class="link" href="https://www.instagram.com/siu_medical/" target="_blank">
+          <i class="fab fa-instagram"></i>&nbsp;Instagram
+        </a>
+        <a class="link" href="https://www.facebook.com/profile.php?id=100093843682088&locale=id_ID" target="_blank">
+          <i class="fab fa-facebook"></i>&nbsp;Facebook
+        </a>
+        <a class="link" href="https://siumedicalbali.com" target="_blank">
+          <i class="fas fa-globe"></i>&nbsp;Website
+        </a>
+        <a class="link" href="tel:+6287780058225">
+          <i class="fas fa-phone"></i>&nbsp;Call
+        </a>
+      </div>
+
+      <div id="hashtag">
+        ❤ Be Happy & Stay Healthy ❤
+      </div>
+
+      <!-- Music Player -->
+      <audio id="bg-music" loop autoplay>
+        <source src="assets/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <div id="music-controls">
+        <button id="music-toggle" onclick="toggleMusic()">
+          <i class="fas fa-music"></i> Pause Music
+        </button>
+        <input type="range" id="volume-slider" min="0" max="100" value="20" onchange="changeVolume(this.value)">
+      </div>
+      <!-- End of Music Player -->
+    </div>
+
+    <script>
+      const audio = document.getElementById('bg-music');
+      const musicToggle = document.getElementById('music-toggle');
+      const volumeSlider = document.getElementById('volume-slider');
+      let isPlaying = true;
+      
+      // Set default volume
+      audio.volume = 0.5;
+      
+      function toggleMusic() {
+        if (isPlaying) {
+          audio.pause();
+          musicToggle.innerHTML = '<i class="fas fa-music"></i> Play Music';
+        } else {
+          audio.play();
+          musicToggle.innerHTML = '<i class="fas fa-music"></i> Pause Music';
+        }
+        isPlaying = !isPlaying;
+      }
+
+      function changeVolume(value) {
+        audio.volume = value / 100;
+      }
+    </script>
+  </body>
+</html>
