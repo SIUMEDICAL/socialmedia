@@ -124,21 +124,25 @@
       <!-- End of Music Player -->
     </div>
 
-    <script>
+<script>
   const audio = document.getElementById('bg-music');
   const musicToggle = document.getElementById('music-toggle');
   const volumeSlider = document.getElementById('volume-slider');
   let isPlaying = true;
+  
+  // Set default volume to 50%
+  audio.volume = 0.5;
 
-  // Set default volume
-  audio.volume = 0.2;
-
-  // Deteksi interaksi pertama untuk memutar musik jika autoplay diblokir
-  document.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.play().catch(error => console.log("Autoplay diblokir, menunggu interaksi pengguna."));
-    }
-  }, { once: true });
+  // Coba autoplay saat halaman dimuat
+  document.addEventListener("DOMContentLoaded", () => {
+    audio.muted = false;
+    audio.play().catch(() => {
+      console.log("Autoplay dengan suara mungkin diblokir, mencoba lagi...");
+      setTimeout(() => {
+        audio.play().catch(err => console.log("Autoplay tetap diblokir:", err));
+      }, 2000);
+    });
+  });
 
   function toggleMusic() {
     if (isPlaying) {
