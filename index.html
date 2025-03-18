@@ -125,28 +125,35 @@
     </div>
 
     <script>
-      const audio = document.getElementById('bg-music');
-      const musicToggle = document.getElementById('music-toggle');
-      const volumeSlider = document.getElementById('volume-slider');
-      let isPlaying = true;
-      
-      // Set default volume
-      audio.volume = 0.5;
-      
-      function toggleMusic() {
-        if (isPlaying) {
-          audio.pause();
-          musicToggle.innerHTML = '<i class="fas fa-music"></i> Play Music';
-        } else {
-          audio.play();
-          musicToggle.innerHTML = '<i class="fas fa-music"></i> Pause Music';
-        }
-        isPlaying = !isPlaying;
-      }
+  const audio = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+  const volumeSlider = document.getElementById('volume-slider');
+  let isPlaying = true;
 
-      function changeVolume(value) {
-        audio.volume = value / 100;
-      }
-    </script>
+  // Set default volume
+  audio.volume = 0.2;
+
+  // Deteksi interaksi pertama untuk memutar musik jika autoplay diblokir
+  document.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play().catch(error => console.log("Autoplay diblokir, menunggu interaksi pengguna."));
+    }
+  }, { once: true });
+
+  function toggleMusic() {
+    if (isPlaying) {
+      audio.pause();
+      musicToggle.innerHTML = '<i class="fas fa-music"></i> Play Music';
+    } else {
+      audio.play();
+      musicToggle.innerHTML = '<i class="fas fa-music"></i> Pause Music';
+    }
+    isPlaying = !isPlaying;
+  }
+
+  function changeVolume(value) {
+    audio.volume = value / 100;
+  }
+</script>
   </body>
 </html>
